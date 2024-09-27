@@ -1,0 +1,62 @@
+﻿@page
+@using ServiceReference1
+@model RazorCLient.Pages.StudentsModel
+@{
+}
+<div class="container">
+    <h2>Students Page</h2>
+    <form method="get" style="width:40%"></form>
+    <div class="input-group mb-3">
+
+        <form method="post" asp-page-handler="SelectAll" style="width:15%">
+            <div class="input-group mb-3">
+                <button class="btn btn-primary" type="Submit" id="SelectAll_btn">SelectAll</button>
+            </div>
+        </form>
+
+        <form method="post" asp-page-handler="SearchById" style="width:15%">
+            <div class="input-group mb-3">
+                <input asp-for="studentID" class="form-control" placeholder="Id ">
+                <button class="btn btn-info" type="Submit" id="SearchById_btn">Search ID</button>
+            </div>
+        </form>
+        <form method="post" asp-page-handler="SearchByName" style="width:20%; margin-left:50px;">
+            <div class="input-group mb-3">
+                <input asp-for="firstName" class="form-control" placeholder="First Name" style="width:100px">
+                <input asp-for="lastName" class="form-control" placeholder="Last Name" style="width:100px">
+                <button class="btn btn-info" type="Submit" id="SearchByName_btn">Search Name</button>
+            </div>
+        </form>
+
+    </div>
+
+    @if (Model.list != null && Model.list.Count > 0)
+    {
+        <table class='table table-bordered table-striped'>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>City </th>
+                <th>Phone</th>
+
+            </tr>
+
+            @foreach (Student student in Model.list)
+            {
+                <tr>
+                    <td>@student.id</td>
+                    <td>@student.Fname</td>
+                    <td>@student.Lname</td>
+                    <td>@student.City.Name</td>
+                    <td>@student.Phone</td>
+
+                </tr>
+            }
+
+        </table>
+    }
+
+</div>
+
+</div>
