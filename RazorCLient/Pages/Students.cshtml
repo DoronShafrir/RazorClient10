@@ -1,5 +1,6 @@
 ﻿@page
 @using ServiceReference1
+@using Microsoft.AspNetCore.Http
 @model RazorCLient.Pages.StudentsModel
 @{
 }
@@ -20,43 +21,82 @@
                 <button class="btn btn-info" type="Submit" id="SearchById_btn">Search ID</button>
             </div>
         </form>
-        <form method="post" asp-page-handler="SearchByName" style="width:20%; margin-left:50px;">
+        <form method="post" asp-page-handler="SearchByName" style="width:30%; margin-left:50px;">
             <div class="input-group mb-3">
-                <input asp-for="firstName" class="form-control" placeholder="First Name" style="width:100px">
-                <input asp-for="lastName" class="form-control" placeholder="Last Name" style="width:100px">
+                <input asp-for="firstName" class="form-control" placeholder="First Name" style="width:80px">
+                <input asp-for="lastName" class="form-control" placeholder="Last Name" style="width:80px">
                 <button class="btn btn-info" type="Submit" id="SearchByName_btn">Search Name</button>
+            </div>
+        </form>
+        <form method="post" asp-page-handler="AddStudentDisplay" style="width:20%; margin-left:50px;">
+            <div class="input-group mb-3">
+                <button class="btn btn-info" type="Submit" id="AddStudentDisply_btn">Toggel Add Student </button>
             </div>
         </form>
 
     </div>
+    <div id="studentsTable" style="display:@Model.hide;">
 
-    @if (Model.list != null && Model.list.Count > 0)
-    {
-        <table class='table table-bordered table-striped'>
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>City </th>
-                <th>Phone</th>
 
-            </tr>
-
-            @foreach (Student student in Model.list)
-            {
+        @if (Model.list != null && Model.list.Count > 0)
+        {
+            <table class='table table-bordered table-striped'>
                 <tr>
-                    <td>@student.id</td>
-                    <td>@student.Fname</td>
-                    <td>@student.Lname</td>
-                    <td>@student.City.Name</td>
-                    <td>@student.Phone</td>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>City </th>
+                    <th>Phone</th>
 
                 </tr>
-            }
 
-        </table>
-    }
+                @foreach (Student student in Model.list)
+                {
+                    <tr>
+                        <td>@student.id</td>
+                        <td>@student.Fname</td>
+                        <td>@student.Lname</td>
+                        <td>@student.City.Name</td>
+                        <td>@student.Phone</td>
 
-</div>
+                    </tr>
+                }
+
+            </table>
+        }
+    </div>
+
+    <div id="AddTable" style="display:@Model.notHide;">
+        <form method="post" asp-page-handler="InsertStudent" style="width:20%; margin-left:50px;">
+            <table class='table table-bordered table-striped'>
+                <tr>
+
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>City </th>
+                    <th>Phone</th>
+
+                </tr>
+
+                <tr>
+
+                    <td><input type="text" name="Fname" /></td>
+                    <td><input type="text" name="Lname" /></td>
+                    <td><input type="text" name="CityName" /></td>
+                    <td><input type="text" name="Phone" /></td>
+
+
+
+            </table>
+
+            <div class="input-group mb-3">
+                <button class="btn btn-info" type="Submit" id="InsertStudente_btn">Add Student</button>
+            </div>
+        </form>
+
+
+    </div>
+
+
 
 </div>

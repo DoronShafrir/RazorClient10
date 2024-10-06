@@ -9,6 +9,7 @@
 
 namespace ServiceReference1
 {
+    using System;
     using System.Runtime.Serialization;
     
     
@@ -493,7 +494,12 @@ namespace ServiceReference1
         {
             return Service1Client.GetEndpointAddress(EndpointConfiguration.BasicHttpBinding_IService1);
         }
-        
+
+        internal int GetInsertStudent(Student student)
+        {
+            throw new NotImplementedException();
+        }
+
         public enum EndpointConfiguration
         {
             
