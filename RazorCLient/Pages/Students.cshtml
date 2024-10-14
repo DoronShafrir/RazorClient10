@@ -1,13 +1,15 @@
 ﻿@page
-@using ServiceReference1
+@using ServiceReference2
 @using Microsoft.AspNetCore.Http
 @model RazorCLient.Pages.StudentsModel
 @{
 }
 <div class="container">
     <h2>Students Page</h2>
+
     <form method="get" style="width:40%"></form>
-    <div class="input-group mb-3">
+
+    <div class="input-group">
 
         <form method="post" asp-page-handler="SelectAll" style="width:15%">
             <div class="input-group mb-3">
@@ -15,12 +17,15 @@
             </div>
         </form>
 
+
         <form method="post" asp-page-handler="SearchById" style="width:15%">
             <div class="input-group mb-3">
                 <input asp-for="studentID" class="form-control" placeholder="Id ">
                 <button class="btn btn-info" type="Submit" id="SearchById_btn">Search ID</button>
             </div>
         </form>
+
+
         <form method="post" asp-page-handler="SearchByName" style="width:30%; margin-left:50px;">
             <div class="input-group mb-3">
                 <input asp-for="firstName" class="form-control" placeholder="First Name" style="width:80px">
@@ -28,13 +33,16 @@
                 <button class="btn btn-info" type="Submit" id="SearchByName_btn">Search Name</button>
             </div>
         </form>
+
         <form method="post" asp-page-handler="AddStudentDisplay" style="width:20%; margin-left:50px;">
             <div class="input-group mb-3">
                 <button class="btn btn-info" type="Submit" id="AddStudentDisply_btn">Toggel Add Student </button>
             </div>
         </form>
-
     </div>
+
+
+
     <div id="studentsTable" style="display:@Model.hide;">
 
 
@@ -47,17 +55,26 @@
                     <th>Last Name</th>
                     <th>City </th>
                     <th>Phone</th>
+                    <th></th>
 
                 </tr>
 
                 @foreach (Student student in Model.list)
                 {
                     <tr>
-                        <td>@student.id</td>
+                        <td>@student.Id</td>
                         <td>@student.Fname</td>
                         <td>@student.Lname</td>
                         <td>@student.City.Name</td>
                         <td>@student.Phone</td>
+                        <td>
+                            <form method="post" asp-page-handler="DeleteStudent" style="width:20%; margin-left:50px;">
+                                <div class="input-group mb-3">
+                                    <input type="hidden" id="studentDeletee" name="studentDelete" value="@student.Id" />
+                                    <button class="btn btn-outline-danger" type="Submit" id="DeleteStudent">Delete Student </button>
+                                </div>
+                            </form>
+                        </td>
 
                     </tr>
                 }
@@ -74,16 +91,25 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>City </th>
-                    <th>Phone</th>
-
+                    <th>Phone</th>                   
                 </tr>
 
                 <tr>
 
                     <td><input type="text" name="Fname" /></td>
                     <td><input type="text" name="Lname" /></td>
-                    <td><input type="text" name="CityName" /></td>
+                    <td>
+                        <select name="cities" id="cities" style="width:189px; height:30px">
+                            <option value="0">Choose  City</option>
+                            @foreach (City city in Model.cityList)
+                            {
+                                <option value="@city.Id">@city.Name</option>
+                            }
+                        </select>
+                    </td>
+
                     <td><input type="text" name="Phone" /></td>
+                    
 
 
 
@@ -93,7 +119,9 @@
                 <button class="btn btn-info" type="Submit" id="InsertStudente_btn">Add Student</button>
             </div>
         </form>
-
+        <div class="alert-success">
+            @Model.msg
+        </div>
 
     </div>
 
