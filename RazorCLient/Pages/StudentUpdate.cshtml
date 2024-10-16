@@ -1,0 +1,55 @@
+﻿@page
+@using ServiceReference2
+@model RazorCLient.Pages.StudentUpdateModel
+@{
+}
+<div id="Update">
+    <form method="get">
+   
+        <table class='table table-bordered table-striped'>
+            <tr>
+
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>City </th>
+                <th>Phone</th>
+            </tr>
+          @{ Student student = Model.list[0]; }
+          
+            <tr>
+                <td><input type="text" name="Fname" value="@student.Fname" /></td>
+                <td><input type="text" name="Lname" value="@student.Lname"/></td>
+                <td>
+                    <select name="cities" id="cities" style="width:189px; height:30px">
+                        <option value="0">Choose  City</option>
+                        @foreach (City city in Model.cityList)
+                        {
+                            if (city.Id == student.City.Id)
+                            {
+                                <option value="@city.Id" selected> @city.Name </option>
+                            }
+                            else
+                            {
+                                <option value="@city.Id" > @city.Name </option>
+                            }
+                                                     
+
+                        }
+                        
+                        }
+                    </select>
+                </td>
+
+                <td><input type="text" name="Phone" /></td>
+
+        </table>
+
+        @* <div class="input-group mb-3">
+            <button class="btn btn-info" type="Submit" id="InsertStudente_btn">Add Student</button>
+        </div> *@
+    </form>
+    <div class="alert-success">
+        @Model.msg
+    </div>
+
+</div>
