@@ -35,7 +35,7 @@ namespace RazorCLient.Pages
             ServiceReference2.Service1Client srv = new ServiceReference2.Service1Client();
             list = srv.GetStudentList();
             srv.Close();
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("InsertStudent")))
+            //if (string.IsNullOrEmpty(HttpContext.Session.GetString("InsertStudent")))
             {
                 HttpContext.Session.SetString("InsertStudent", "True");
                 hide = "block";

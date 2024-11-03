@@ -4,6 +4,30 @@
 @model RazorCLient.Pages.StudentsModel
 @{
 }
+<style>
+    .update-link {
+        display: none;
+        position: absolute;
+      
+        left: 50%; /* Center horizontally */
+        transform: translate(-50%, -50%); /* Ensure perfect centering */
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    }
+    /* Show the link on row hover */
+    tr:hover .update-link {
+        display: block;
+    }
+    /* Optional: Row hover effect */
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+</style>
 <div class="container">
     <h2>Students Page</h2>
 
@@ -77,7 +101,7 @@
                             </form>
                         </td>
                         <td>
-                            <a asp-page="StudentUpdate" asp-route-param="@student.Id">Update</a>
+                            <a asp-page="StudentUpdate" asp-route-param="@student.Id" class="update-link">Update</a>
                         </td>
 
                     </tr>

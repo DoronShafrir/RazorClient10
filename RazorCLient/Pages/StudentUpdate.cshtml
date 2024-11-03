@@ -4,7 +4,7 @@
 @{
 }
 <div id="Update">
-    <form method="get">
+    <form method="post" asp-page-handler="UpdateStudent">
    
         <table class='table table-bordered table-striped'>
             <tr>
@@ -40,13 +40,13 @@
                     </select>
                 </td>
 
-                <td><input type="text" name="Phone" /></td>
+                <td><input type="text" name="Phone" value="@student.Phone" /></td>
 
         </table>
 
-        @* <div class="input-group mb-3">
-            <button class="btn btn-info" type="Submit" id="InsertStudente_btn">Add Student</button>
-        </div> *@
+        <div class="input-group mb-3">
+            <button class="btn btn-info" type="Submit" id="InsertStudente_btn">Update Student</button>
+        </div>
     </form>
     <div class="alert-success">
         @Model.msg
